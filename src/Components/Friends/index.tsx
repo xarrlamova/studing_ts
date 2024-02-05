@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Friend} from "./Friend";
 import {FriendInterface} from "../../types/types";
 
 
-export const Friends = (props: {friends: Array<FriendInterface>}) => {
+export const Friends = memo((props: {friends: Array<FriendInterface>}) => {
     const {friends} = props;
     if (!friends.length) {
         return(<div>
@@ -14,4 +14,4 @@ export const Friends = (props: {friends: Array<FriendInterface>}) => {
     return (<tbody >
     {friends.map((el) => (<Friend key={el.id} friend={el}/>))}
     </tbody>)
-}
+})

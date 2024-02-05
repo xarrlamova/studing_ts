@@ -8,7 +8,7 @@ interface AddFriendProps {
     onAdd: (friend: FriendInterface) => void
 }
 
-export const AddFriend = (props: AddFriendProps) => {
+export const AddFriend = memo((props: AddFriendProps) => {
     const {onAdd} = props;
 
     const [friend, setFriend] = useState<FriendInterface>(
@@ -61,7 +61,7 @@ export const AddFriend = (props: AddFriendProps) => {
     // }
 
 
-    const ValidationHandler = (
+    const ValidationHandler = useCallback((
                                    /** Значение, веденное пользователем*/
                                    e: React.ChangeEvent<HTMLInputElement>,
 
@@ -84,21 +84,21 @@ export const AddFriend = (props: AddFriendProps) => {
             setError('');
             setFriend(prevState => ({...prevState, [nameValue]: e.target.value}));
         }
-    }
+    }, [])
 
-    const nameHandler = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    const nameHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
         ValidationHandler(e, setName, setNameError, NAME_REGEX, firstname)
-    }
+    }, [ValidationHandler]);
 
-    const surnameHandler = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    const surnameHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
         ValidationHandler(e, setSurname, setSurnameError, NAME_REGEX, lastname)
-    }
+    }, [ValidationHandler]);
 
-    const ageHandler = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    const ageHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
         ValidationHandler(e, setAge, setAgeError, /^[1-9][0-9]*$/, 'age')
-    }
+    }, [ValidationHandler]);
 
-    const blurHandler = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    const blurHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
         switch (e.target.name) {
             case firstname:
                 setNameDirty(true)
@@ -112,24 +112,56 @@ export const AddFriend = (props: AddFriendProps) => {
             default:
                 console.log('default')
         }
-    }
+    }, [])
 
-    const clickingOnAddFriendsButton = ():void => {
+    const clickingOnAddFriendsButton = useCallback(():void => {
         onAdd({
             firstname: friend.firstname,
             lastname: friend.lastname,
             age: +friend.age,
         })
-    }
+    }, [friend.age, friend.firstname, friend.lastname, onAdd])
 
     return (
         <form>
-            <ValidationInput className="add-friends-input" isDirty={isNameDirty} error={nameError} handler={nameHandler} value={name} blurHandler={blurHandler} nameItem='Имя' name={firstname}/>
-            <ValidationInput className="add-friends-input" isDirty={isSurnameDirty} error={surnameError} handler={surnameHandler} value={surname} blurHandler={blurHandler} nameItem='Фамилия' name={lastname}/>
-            <ValidationInput className="add-friends-input" isDirty={isAgeDirty} error={ageError} handler={ageHandler} value={age} blurHandler={blurHandler} nameItem='Возраст' name={'age'}/>
-            <button disabled={!isFormValid} className="add-friends-button" type="button"
-                    onClick={clickingOnAddFriendsButton}>Добавить!!
+            <ValidationInput 
+                className="add-friends-input" 
+                isDirty={isNameDirty} 
+                error={nameError} 
+                handler={nameHandler} 
+                value={name} 
+                blurHandler={blurHandler} 
+                nameItem='Имя' 
+                name={firstname}
+            />
+            <ValidationInput 
+                className="add-friends-input" 
+                isDirty={isSurnameDirty} 
+                error={surnameError} 
+                handler={surnameHandler} 
+                value={surname} 
+                blurHandler={blurHandler} 
+                nameItem='Фамилия' 
+                name={lastname}
+            />
+            <ValidationInput 
+                className="add-friends-input" 
+                isDirty={isAgeDirty} 
+                error={ageError} 
+                handler={ageHandler} 
+                value={age} 
+                blurHandler={blurHandler} 
+                nameItem='Возраст' 
+                name={'age'}
+            />
+            <button 
+                disabled={!isFormValid} 
+                className="add-friends-button" 
+                type="button"
+                onClick={clickingOnAddFriendsButton}
+            >
+                Добавить!!
             </button>
         </form>
     )
-}
+})

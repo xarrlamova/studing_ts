@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {FriendInterface} from "../../types/types";
 
-export const Friend = (props: {friend: FriendInterface }) => {
+export const Friend = memo((props: {friend: FriendInterface }) => {
     const {friend} = props
     const {firstname, lastname, age} = friend;
     return (
@@ -11,4 +11,4 @@ export const Friend = (props: {friend: FriendInterface }) => {
             <td>{age}</td>
         </tr>)
     )
-}
+})

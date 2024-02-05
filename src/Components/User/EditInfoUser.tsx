@@ -1,4 +1,4 @@
-import React, {ReactElement, ReactEventHandler, useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import {useEffect} from "react";
 import { IoClose } from "react-icons/io5";
 import { IoCheckmark } from "react-icons/io5";
@@ -23,7 +23,7 @@ interface EditInfoUserProps {
     valueForm: string,
 }
 
-export const EditInfoUser = (props: EditInfoUserProps) => {
+export const EditInfoUser = memo((props: EditInfoUserProps) => {
     const {nameItem, nameForm, showEditForm, onEdit, valueForm} = props;
 
     const [item, setItem] = useState<string>(valueForm)
@@ -39,22 +39,23 @@ export const EditInfoUser = (props: EditInfoUserProps) => {
         }
     }, [itemError])
 
-    const itemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setItem(e.target.value)
-        if (!(NAME_REGEX.test(e.target.value))) {
+    const itemHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const value:string = e.target.value
+        setItem(value)
+        if (!(NAME_REGEX.test(value))) {
             setItemError('Неккоректное значение');
         }
         else {
             setItemError('');
-            setItem(e.target.value);
+            setItem(value);
         }
-    }
+    },[])
 
-    const blurHandler = (): void => {
+    const blurHandler = useCallback((): void => {
         setIsItemDirty(true)
-    }
+    }, [])
 
-    const clickingOnOkButton = (): void => {
+    const clickingOnOkButton = useCallback((): void => {
         if (isFormValid) {
             onEdit({
                 nameForm: nameForm,
@@ -62,17 +63,25 @@ export const EditInfoUser = (props: EditInfoUserProps) => {
             });
             showEditForm();
         }
-    }
+    }, [isFormValid, item, nameForm])
 
-    const clickingOnCloseButton = (): void => {
+    const clickingOnCloseButton = useCallback((): void => {
         showEditForm();
-    }
+    }, [showEditForm])
 
     return (
         <form>
-            <ValidationInput className="edit-form" isDirty={isItemDirty} error={itemError} handler={itemHandler} value={item} blurHandler={blurHandler} nameItem={nameItem}/>
+            <ValidationInput
+                className="edit-form"
+                isDirty={isItemDirty}
+                error={itemError}
+                handler={itemHandler}
+                value={item}
+                blurHandler={blurHandler}
+                nameItem={nameItem}
+            />
             <IoClose className="close-button" onClick={clickingOnCloseButton}/>
-            <IoCheckmark aria-disabled={!isFormValid} className="ok-button" onClick={clickingOnOkButton}/>
+            <IoCheckmark className="ok-button" aria-disabled={!isFormValid} onClick={clickingOnOkButton}/>
         </form>
     )
-}
+})

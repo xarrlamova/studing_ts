@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {InfoUser} from "./InfoUser";
 import {UserInterface, EditInterface} from "../../types/types";
 
@@ -9,7 +9,7 @@ interface UserProps{
     /** Данные пользователя (Имя, Фамилия) */
     user: UserInterface,
 }
-export const User = (props: UserProps) => {
+export const User = memo((props: UserProps) => {
     const {user, onEdit} = props;
     const {firstname, lastname} = user;
 
@@ -20,4 +20,4 @@ export const User = (props: UserProps) => {
             <InfoUser valueForm={lastname} onEdit={onEdit} nameItem="Фамилия" nameForm="lastname"/>
         </div>
     )
-}
+})

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 
 interface ValidationInputProps {
     /** Флаг, был ли пользователь в поле */
@@ -26,7 +26,7 @@ interface ValidationInputProps {
     className: string,
 }
 
-export const ValidationInput = (props: ValidationInputProps) => {
+export const ValidationInput = memo((props: ValidationInputProps) => {
     const {isDirty, error, handler, value, blurHandler, nameItem, name, className} = props;
 
     return (
@@ -36,4 +36,4 @@ export const ValidationInput = (props: ValidationInputProps) => {
                    onChange={handler} value={value} onBlur={blurHandler} name={name}/>
         </>
     )
-}
+})

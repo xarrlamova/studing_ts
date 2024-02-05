@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import {IoCreateOutline} from "react-icons/io5";
 import {EditInfoUser} from "./EditInfoUser";
 import {EditInterface} from "../../types/types";
@@ -17,17 +17,16 @@ interface InfoUserProps {
     nameForm: string,
 }
 
-export const InfoUser = (props: InfoUserProps) => {
+export const InfoUser = memo((props: InfoUserProps) => {
     const {valueForm, onEdit, nameItem, nameForm} = props;
 
     const [isEditForm, setIsEditForm] = useState<boolean>(
         false
     );
 
-    const showEditForm = ():void => {
+    const showEditForm = useCallback(():void => {
         setIsEditForm(prevState => !prevState)
-    }
-
+    }, [])
     return (
         <div className="info">
             <p className="text">{valueForm}</p>
@@ -35,4 +34,4 @@ export const InfoUser = (props: InfoUserProps) => {
             {isEditForm && <EditInfoUser showEditForm={showEditForm} nameItem={nameItem} valueForm={valueForm} nameForm={nameForm} onEdit={onEdit}/>}
         </div>
     )
-}
+})
