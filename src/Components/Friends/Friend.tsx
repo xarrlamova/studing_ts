@@ -1,9 +1,8 @@
 import React, {memo} from 'react';
 import {FriendInterface} from "../../types/types";
 
-export const Friend = memo((props: {friend: FriendInterface }) => {
-    const {friend} = props
-    const {firstname, lastname, age} = friend;
+export const Friend = memo((props: FriendInterface) => {
+    const {firstname, lastname, age} = props;
     return (
         (<tr className="friends">
             <td>{firstname}</td>

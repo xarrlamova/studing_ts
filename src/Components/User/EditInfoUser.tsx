@@ -4,24 +4,8 @@ import { IoClose } from "react-icons/io5";
 import { IoCheckmark } from "react-icons/io5";
 import {NAME_REGEX} from "../AddFriend/constants";
 import {ValidationInput} from "../ValidationInput";
-import {EditInterface} from "../../types/types";
+import {EditInfoUserProps} from "./interfaces";
 
-interface EditInfoUserProps {
-    /** Название значения на русском*/
-    nameItem: string,
-
-    /** Название поля */
-    nameForm: string,
-
-    /** Функция, управляет состояние - отображать форму редактирования или нет */
-    showEditForm: () => void,
-
-    /** Функция сохранения редактируемого значения в данных пользователя*/
-    onEdit: (info: EditInterface) => void,
-
-    /** Значение поля */
-    valueForm: string,
-}
 
 export const EditInfoUser = memo((props: EditInfoUserProps) => {
     const {nameItem, nameForm, showEditForm, onEdit, valueForm} = props;

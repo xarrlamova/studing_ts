@@ -1,0 +1,19 @@
+.add-friends-button, .add-friends-input {
+    width: 10%;
+    padding: 15px 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    margin: 20px;
+    border: 1px;
+    background: #899cb4;
+    color: #070707;
+}
+.add-friends-button{
+    width: 15%;
+    cursor: pointer;
+    transition: transform 500ms ease;
+}
+
+.add-friends-button:hover {
+    transform: scale(1.1);
+}

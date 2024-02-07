@@ -12,6 +12,6 @@ export const Friends = memo((props: {friends: Array<FriendInterface>}) => {
     }
 
     return (<tbody >
-    {friends.map((el) => (<Friend key={el.id} friend={el}/>))}
+    {friends.map((el) => (<Friend key={el.id} {...el}/>))}
     </tbody>)
 })

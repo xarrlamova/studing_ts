@@ -3,10 +3,7 @@ import {useEffect} from "react";
 import {NAME_REGEX} from "./constants";
 import {ValidationInput} from "../ValidationInput";
 import {FriendInterface} from "../../types/types";
-
-interface AddFriendProps {
-    onAdd: (friend: FriendInterface) => void
-}
+import {AddFriendProps} from "./interfaces";
 
 export const AddFriend = memo((props: AddFriendProps) => {
     const {onAdd} = props;
@@ -61,42 +58,34 @@ export const AddFriend = memo((props: AddFriendProps) => {
     // }
 
 
-    const ValidationHandler = useCallback((
-                                   /** Значение, веденное пользователем*/
+    const validationHandler = useCallback((
                                    e: React.ChangeEvent<HTMLInputElement>,
-
-                                   /** Сеттер состояния редактируемого значения */
                                    setFunction: (value : string) => void,
-
-                                   /** Сетер состояния ошибки */
                                    setError: (value: string) => void,
-
-                                   /** Регулярное выражение для валидации */
                                    reg: RegExp,
-
-                                   /** Название значения для редактирования */
                                    nameValue: string,
                                    ):void => {
-        setFunction(e.target.value)
-        if (!reg.test(e.target.value)) {
+        const value:string = e.target.value
+        setFunction(value)
+        if (!reg.test(value)) {
             setError('Неккоректное значение')
         } else {
             setError('');
-            setFriend(prevState => ({...prevState, [nameValue]: e.target.value}));
+            setFriend(prevState => ({...prevState, [nameValue]:value}));
         }
     }, [])
 
     const nameHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
-        ValidationHandler(e, setName, setNameError, NAME_REGEX, firstname)
-    }, [ValidationHandler]);
+        validationHandler(e, setName, setNameError, NAME_REGEX, firstname)
+    }, [validationHandler]);
 
     const surnameHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
-        ValidationHandler(e, setSurname, setSurnameError, NAME_REGEX, lastname)
-    }, [ValidationHandler]);
+        validationHandler(e, setSurname, setSurnameError, NAME_REGEX, lastname)
+    }, [validationHandler]);
 
     const ageHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
-        ValidationHandler(e, setAge, setAgeError, /^[1-9][0-9]*$/, 'age')
-    }, [ValidationHandler]);
+        validationHandler(e, setAge, setAgeError, /^[1-9][0-9]*$/, 'age')
+    }, [validationHandler]);
 
     const blurHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>):void => {
         switch (e.target.name) {
@@ -118,7 +107,7 @@ export const AddFriend = memo((props: AddFriendProps) => {
         onAdd({
             firstname: friend.firstname,
             lastname: friend.lastname,
-            age: +friend.age,
+            age: Number(friend.age),
         })
     }, [friend.age, friend.firstname, friend.lastname, onAdd])
 

@@ -1,21 +1,7 @@
 import React, {memo, useCallback, useState} from 'react';
 import {IoCreateOutline} from "react-icons/io5";
 import {EditInfoUser} from "./EditInfoUser";
-import {EditInterface} from "../../types/types";
-
-interface InfoUserProps {
-    /** Значение поля */
-    valueForm: string,
-
-    /** Функция сохранения редактируемого значения в данных пользователя*/
-    onEdit: (info: EditInterface) => void,
-
-    /** Название значения на русском*/
-    nameItem: string,
-
-    /** Название поля */
-    nameForm: string,
-}
+import {InfoUserProps} from "./interfaces";
 
 export const InfoUser = memo((props: InfoUserProps) => {
     const {valueForm, onEdit, nameItem, nameForm} = props;
