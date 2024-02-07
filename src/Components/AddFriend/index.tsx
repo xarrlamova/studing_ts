@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useMemo, useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import {useEffect} from "react";
 import {NAME_REGEX} from "./constants";
 import {ValidationInput} from "../ValidationInput";
@@ -38,25 +38,6 @@ export const AddFriend = memo((props: AddFriendProps) => {
             setIsFormValid(true)
         }
     }, [nameError, surnameError, ageError])
-
-
-    // СПРОСИТЬ У РУСЛАНА
-    // type ValidationHandlerInterface {
-    //     /** Значение, веденное пользователем*/
-    //     e: React.ChangeEvent<HTMLInputElement>,
-    //
-    //     setFunction: (value: string) => void,
-    //
-    //     /** Сетер состояния ошибки */
-    //     setError: (value: string) => void,
-    //
-    //     /** Регулярное выражение для валидации */
-    //     reg: RegExp,
-    //
-    //     /** Название значения для редактирования */
-    //     nameValue: string,
-    // }
-
 
     const validationHandler = useCallback((
                                    e: React.ChangeEvent<HTMLInputElement>,
