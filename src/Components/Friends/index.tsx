@@ -1,10 +1,12 @@
 import "./styles.css"
 import React, {memo} from 'react';
 import {Friend} from "./Friend";
-import {FriendInterface} from "../../types/types";
+import {Table} from "antd";
+import {ColumnInterface} from "./interfaces";
+import {FriendsProps} from "./interfaces";
 
 
-export const Friends = memo((props: {friends: Array<FriendInterface>}) => {
+export const Friends = memo((props: FriendsProps) => {
     const {friends} = props;
     if (!friends.length) {
         return(<div>
@@ -12,7 +14,26 @@ export const Friends = memo((props: {friends: Array<FriendInterface>}) => {
         </div>)
     }
 
-    return (<tbody >
-    {friends.map((el) => (<Friend key={el.id} {...el}/>))}
-    </tbody>)
+    const columns: ColumnInterface[] = [
+        {
+            key: 'firstname',
+            title: 'Имя',
+            dataIndex: 'firstname'
+        },
+        {
+            key: 'lastname',
+            title: 'Фамилия',
+            dataIndex: 'lastname'
+        },
+        {
+            key: 'age',
+            title: 'Возраст',
+            dataIndex: 'age'
+        },
+    ]
+
+    // return
+    return (
+            <Table className="table" pagination={false} columns={columns} dataSource={friends}/>
+        )
 })

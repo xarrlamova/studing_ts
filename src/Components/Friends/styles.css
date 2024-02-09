@@ -1,4 +1,6 @@
-.friends{
+.table{
     margin: 50px 100px;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
