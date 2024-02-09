@@ -1,6 +1,5 @@
 import "./styles.css"
 import React, {memo} from 'react';
-import {Friend} from "./Friend";
 import {Table} from "antd";
 import {ColumnInterface} from "./interfaces";
 import {FriendsProps} from "./interfaces";
@@ -32,7 +31,6 @@ export const Friends = memo((props: FriendsProps) => {
         },
     ]
 
-    // return
     return (
             <Table className="table" pagination={false} columns={columns} dataSource={friends}/>
         )

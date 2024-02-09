@@ -12,5 +12,6 @@ export interface ColumnInterface {
 }
 
 export interface FriendsProps {
+    /** Массив друзей */
     friends: Array<FriendInterface>
 }
