@@ -1,0 +1,6 @@
+.table{
+    margin: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}

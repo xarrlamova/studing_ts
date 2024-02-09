@@ -1,5 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+body {
+  background-color: #a8bad3;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
 .App {
   text-align: center;
+  background-color: #c5d3f1;
 }
 
 .App-logo {
@@ -21,12 +30,19 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #fafafa;
 }
 
 .App-link {
   color: #61dafb;
 }
+
+.add-friends{
+  width: 100%;
+  vertical-align: middle;
+}
+
+input::-webkit-input-placeholder { color: #525a62; }
 
 @keyframes App-logo-spin {
   from {

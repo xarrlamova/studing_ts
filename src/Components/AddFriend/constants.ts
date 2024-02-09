@@ -1,0 +1,1 @@
+export  const NAME_REGEX: RegExp = /^([a-zа-яё]+[\s]{0,1}[a-zа-яё]+[\s]{0,1}[a-zа-яё]+)$/ig
