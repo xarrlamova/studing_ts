@@ -1,3 +1,4 @@
+import "./styles.css"
 import React, {memo} from 'react';
 import {Friend} from "./Friend";
 import {FriendInterface} from "../../types/types";

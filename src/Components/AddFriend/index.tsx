@@ -1,3 +1,4 @@
+import "./styles.css"
 import React, {memo, useCallback, useState} from 'react';
 import {useEffect} from "react";
 import {NAME_REGEX} from "./constants";

@@ -1,3 +1,4 @@
+import "./styles.css"
 import React from 'react';
 import avatar from './avatar.jpg'
 import {memo} from "react";

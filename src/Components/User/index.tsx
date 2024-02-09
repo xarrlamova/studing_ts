@@ -1,3 +1,4 @@
+import "./styles.css"
 import React, {memo} from 'react';
 import {InfoUser} from "./InfoUser";
 import {UserProps} from "./interfaces";
