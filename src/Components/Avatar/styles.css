@@ -1,0 +1,9 @@
+.avatar {
+    background-color: #c4c4c4;
+    height: 300px;
+    width: 250px;
+    display: inline-block;
+    margin: 10px;
+    border: 5px solid black;
+    vertical-align: middle;
+}
